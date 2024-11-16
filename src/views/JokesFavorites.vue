@@ -1,18 +1,21 @@
 <template>
 
     <v-container>
+
         <v-row>
-            <v-col cols="12">
+            <v-col cols="12" class=" text-h5  text-md-h4 text-center  text-grey-darken-5 comic-neue-bold">
                 <div class=" float-left">
                     <v-btn variant="tonal" @click="pushHome()">
                         <v-icon size="20px"> mdi-arrow-left </v-icon>
                     </v-btn>
                 </div>
-                <div>
-                    <div class="mb-10 text-h3 text-center text-grey-darken-5 comic-neue-bold">Favorites jokes page!
-                    </div>
-                </div>
+                <v-col class=" items-center h-100">
+                    Favorites jokes page!
+                </v-col>
             </v-col>
+        </v-row>
+
+        <v-row>
             <v-col cols="12">
                 <v-row>
                     <v-col cols="12" sm="6" lg="3" v-for="itemCounter in valuesCounterCard ">
@@ -59,9 +62,6 @@
                     </template>
                 </v-data-iterator>
             </v-col>
-
-
-
         </v-row>
     </v-container>
 
