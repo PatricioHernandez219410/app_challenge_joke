@@ -1,19 +1,20 @@
-import type { get } from 'node_modules/axios/index.cjs';
 import Api, { errorHandler } from './ApiService';
 
 const resource = 'jokes';
 
+let api = Api()
+
 export default {
     getJokesAmount(amount: number) {
-        return Api().get(`${resource}/random/${amount}`)
+        return api.get(`${resource}/random/${amount}`)
     },
     getRandomJokeByType(type: string) {
-        return Api().get(`${resource}/${type}/random`)
+        return api.get(`${resource}/${type}/random`)
     },
     getTypes() {
-        return Api().get(`types`)
+        return api.get(`types`)
     },
     getRandomJoke() {
-        return Api().get(`random_joke`)
+        return api.get(`random_joke`)
     }
 }
