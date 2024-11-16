@@ -10,7 +10,9 @@ export const useJokeStore = defineStore({
         const joke: Joke | null = null;
         return { jokes, types, joke };
     },
-    persist: true,
+    persist: {
+        omit: ['joke'],
+    },
     actions: {
         getTypes: async function() {
             if (this.types.length) return;
@@ -26,17 +28,19 @@ export const useJokeStore = defineStore({
             }
         },
         getRandomJoke: async function () {
-            const response = await JokeService.getRandomJoke();
             if (this.joke){
                 this.jokes.push({...this.joke});
+                this.joke = null;
             }
+            const response = await JokeService.getRandomJoke();
             this.joke = response.data || null;
         },
         getRandomJokeByType: async function (type: string) {
-            const response = await JokeService.getRandomJokeByType(type);
             if (this.joke){
                 this.jokes.push({...this.joke});
+                this.joke = null;
             }
+            const response = await JokeService.getRandomJokeByType(type);
             this.joke = response.data[0] || null;
         },
     },

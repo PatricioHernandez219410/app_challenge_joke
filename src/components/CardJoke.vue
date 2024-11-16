@@ -1,22 +1,19 @@
 <template>
-  <v-card class="mx-auto">
-    <v-card-title class="headline">Joke of the day</v-card-title>
-
+  <v-card class="mx-auto" v-if="joke?.id">
     <v-card-text>
-      <div>{{ joke.setup }}</div>
+      <div class="text-h6 font-weight-regular text-grey-darken-5 comic-neue-bold">{{ joke.setup }}</div>
       <v-divider class="my-3"></v-divider>
-      <div>{{ joke.punchline }}</div>
+      <div class="text-h6 font-weight-regular text-grey-darken-5 comic-neue-bold">{{ joke.punchline }}</div>
     </v-card-text>
-
     <v-card-actions>
       <v-btn color="green" @click="addLike()" icon>
         <v-icon>{{ joke.likes > 0 && 'mdi-thumb-up' || 'mdi-thumb-up-outline' }}</v-icon>
       </v-btn>
       <v-btn color="red" @click="addDislike()" icon>
-        <v-icon> {{ joke.likes < 0 && 'mdi-thumb-down' || 'mdi-thumb-down-outline' }}</v-icon> 
+        <v-icon> {{ joke.likes < 0 && 'mdi-thumb-down' || 'mdi-thumb-down-outline' }}</v-icon>
       </v-btn>
       <v-btn color="red" @click="addFavorite()" icon>
-        <v-icon>{{ joke.favorite && 'mdi-heart' || 'mdi-heart-outline'}}</v-icon>
+        <v-icon>{{ joke.favorite && 'mdi-heart' || 'mdi-heart-outline' }}</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
       <v-chip variant="outlined" class="mr-2">
@@ -24,14 +21,18 @@
       </v-chip>
     </v-card-actions>
   </v-card>
+  <div class="my-6" v-else>
+    <v-skeleton-loader class="mx-auto" type="article"></v-skeleton-loader>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 const props = defineProps({
   joke: Object
 })
+
 
 const addLike = () => {
   if (props.joke.likes === undefined) {
@@ -56,6 +57,6 @@ const addFavorite = () => {
 
 </script>
 
-<style scoped>
+<style>
 
 </style>

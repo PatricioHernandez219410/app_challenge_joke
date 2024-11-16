@@ -1,7 +1,9 @@
 <template>
   <div style="">
     <div class="w-100">
-      <h3 class="text-center ">Infinite Jokes Scroll</h3>
+      <div class="text-center text-h6 text-grey-darken-5 comic-neue-bold">
+        <v-icon size="large" class="mr-2">mdi mdi-all-inclusive</v-icon>Infinite Jokes Scroll</div>
+      <v-divider></v-divider>
     </div>
     <v-infinite-scroll :height="'80vh'" :items="jokeStore.jokes" :onLoad="load">
       <template v-for="(item, index) in jokeStore.jokes" :key="item">
@@ -15,7 +17,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import JokesService from '@/services/JokeService'
 import CardJoke from './CardJoke.vue';
 
 import { useJokeStore } from '@/stores/joke';

@@ -7,21 +7,20 @@
 </template>
 
 <script setup>
-import { defineComponent, onMounted } from 'vue'
-
+import { onMounted } from 'vue'
 import { useJokeStore } from '@/stores/joke'
 
 let jokeStore = useJokeStore()
 
 onMounted(async () => {
-
   await jokeStore.getTypes()
-
 })
 
 </script>
 
 <style>
+
+@import url("https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css");
 
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&disgetTypesy=swap');
 

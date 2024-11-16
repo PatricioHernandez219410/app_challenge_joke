@@ -1,22 +1,24 @@
 <template>
   <div>
     <div class="w-100 ">
-      <h3 class="text-center">Random Joke</h3>
+      <div class="text-center text-h6 text-grey-darken-5 comic-neue-bold">
+        <v-icon size="large" class="mr-2">mdi mdi-dice-multiple</v-icon>Random Joke</div>
+      <v-divider></v-divider>
     </div>
     <div class="mt-4">
-      <cardJoke v-if="jokeStore.joke" :joke="jokeStore.joke" />
+      <cardJoke :joke="jokeStore.joke" :key="componenteKey" />
     </div>
     <v-card>
       <v-row class="pa-3 ">
         <v-col cols="12">
           <v-btn variant="tonal" color="primary" stacked block @click="getRandomJoke()">
-            <v-icon size="50px">mdi-all-inclusive</v-icon>
-            Any Type
+            <v-icon size="50px">mdi-dice-multiple</v-icon>
+            Get Random Joke
           </v-btn>
         </v-col>
         <v-col cols="6" md="4" lg="3" class="px-1" v-for="(type, index) in jokeStore.types" :key="index">
-          <v-btn :color="getRandomColor()" variant="tonal" stacked block @click="getRandomJokeByType(type)">
-            <v-icon size="40px">{{getRandomIcon()}}</v-icon>
+          <v-btn :color="getColor(index)" variant="tonal" stacked block @click="getRandomJokeByType(type)">
+            <v-icon size="40px">{{getIcon(index)}}</v-icon>
             <span class="text-no-wrap">{{ type }}</span>
           </v-btn>
         </v-col>
@@ -26,7 +28,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 import CardJoke from '@/components/CardJoke.vue'
 
@@ -34,18 +36,14 @@ import { useJokeStore } from '@/stores/joke';
 
 const jokeStore = useJokeStore()
 
-const colors = ref(['green', 'red', 'blue', 'yellow', 'purple', 'pink', 'orange', 'indigo', 'teal', 'cyan', 'lime', 'amber', 'deep-purple', 'deep-orange', 'light-blue', 'light-green', 'blue-grey', 'brown', 'grey', 'black'])
+const componenteKey = ref(0);
 
-const icons = ref(['mdi-emoticon-happy-outline', 'mdi-emoticon-excited-outline', 'mdi-emoticon-sad-outline', 'mdi-emoticon-neutral-outline', 'mdi-emoticon-kiss-outline', 'mdi-emoticon-devil-outline', 'mdi-emoticon-cool-outline', 'mdi-emoticon-confused-outline', 'mdi-emoticon-cry-outline', 'mdi-emoticon-dead-outline', 'mdi-emoticon-excited-outline', 'mdi-emoticon-frown-outline', 'mdi-emoticon-happy-outline', 'mdi-emoticon-kiss-outline', 'mdi-emoticon-lol-outline', 'mdi-emoticon-neutral-outline', 'mdi-emoticon-outline', 'mdi-emoticon-poop-outline', 'mdi-emoticon-sad-outline', 'mdi-emoticon-tongue'])
-
-const getRandomIcon = () => {
-  const index = Math.floor(Math.random() * icons.value.length)
-  return icons.value[index]
+const getIcon = (index) => {
+  return ['mdi-emoticon-happy-outline', 'mdi-emoticon-excited-outline', 'mdi-emoticon-cool-outline', 'mdi-emoticon-happy-outline'][index]
 }
 
-const getRandomColor = () => {
-  const index = Math.floor(Math.random() * colors.value.length)
-  return colors.value[index]
+const getColor = (index) => {
+  return ['green', 'orange', 'blue', 'deep-purple'][index]
 }
 
 const getRandomJoke = async () => {
@@ -58,6 +56,10 @@ const getRandomJokeByType = async (type) => {
 
 onMounted(async () => {
   await getRandomJoke()
+})
+
+watch(() => jokeStore.joke, () => {
+  componenteKey.value++
 })
 
 

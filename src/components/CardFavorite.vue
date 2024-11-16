@@ -4,19 +4,31 @@
       <v-col cols="12">
         <v-btn variant="tonal" color="red" stacked block @click="pushFavorite">
           <v-icon size="50px">mdi-heart-outline</v-icon>
-          favorites {{ jokeStore.favorites.length }}
+          display my {{ jokeStore.favorites.length != 0 && jokeStore.favorites.length || '' }} favorites
         </v-btn>
       </v-col>
       <v-col cols="6">
-        <v-sheet rounded class=" d-block text-center text-green">
-          <v-icon size="50px" class=" d-block mx-auto" >mdi-thumb-up-outline</v-icon>
-          likes {{ jokeStore.likes }}
+        <v-sheet rounded class=" d-flex justify-center  text-center text-green">
+          <div class=" d-flex align-content-start mx-1">
+            <span style="font-size: 3rem;" class=" font-weight-regular" >
+              {{ jokeStore.likes }}
+            </span>
+          </div>
+          <div class="pt-2">
+            <v-icon size="48px" class=" d-block mx-auto" >mdi-thumb-up-outline</v-icon>
+          </div>
         </v-sheet>
       </v-col>
       <v-col cols="6">
-        <v-sheet rounded class=" d-block text-center text-red">
-          <v-icon size="50px" class=" d-block mx-auto" >mdi-thumb-down-outline</v-icon>
-          dislike {{ jokeStore.dislikes }}
+        <v-sheet rounded class=" d-flex justify-center text-center text-red">
+          <div class=" d-flex align-content-start mx-1">
+            <span style="font-size: 3rem;" class=" font-weight-regular" >
+              {{ jokeStore.dislikes }}
+            </span>
+          </div>
+          <div class="pt-2">
+            <v-icon size="48px" class=" d-block mx-auto" >mdi-thumb-down-outline</v-icon>
+          </div>
         </v-sheet>
       </v-col>
     </v-row>

@@ -14,6 +14,7 @@ const router = createRouter({
       name: 'favorites',
       component: () => import('../views/JokesFavorites.vue'),
     },
+    { path: '/:pathMatch(.*)*', component: JokesView }
   ],
 })
 

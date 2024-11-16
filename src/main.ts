@@ -7,8 +7,6 @@ import { loadFonts } from '@/plugins/webfontloader'
 
 loadFonts()
 
-
-
 createApp(App)
   .use(pinia)
   .use(vuetify)
